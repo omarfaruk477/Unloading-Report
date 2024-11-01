@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2024-10-01",
+    "godown": "500",
+    "delivery": "1500",
+    "total_delivery": 2000,
+    "remark": "Alauddin"
+  },
+  {
+    "date": "2024-10-02",
+    "godown": "1200",
+    "delivery": "3200",
+    "total_delivery": 4400,
+    "remark": "Forhad"
+  },
+  {
+    "date": "2024-10-03",
+    "godown": "2800",
+    "delivery": "1300",
+    "total_delivery": 4100,
+    "remark": "Raju"
+  }
+]
