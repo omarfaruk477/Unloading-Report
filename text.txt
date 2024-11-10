@@ -1,0 +1,105 @@
+
+
+Share
+
+
+You said:
+<?php
+require('connection.php');
+?>
+
+<?php
+
+// EDIT DATA UPDATE 'new PDO' 
+if (isset($_GET['id'])) {
+    $get_id = $_GET['id'];
+
+    $sql = "SELECT * FROM unloagingdata WHERE id = $get_id";
+    $dataStmt = $connection->prepare($sql);
+    $dataStmt->execute();
+    $data = $dataStmt->fetchAll(PDO::FETCH_OBJ);
+}
+foreach ($data as $item) {
+    $edit_id = $item->id;
+    $edit_date = $item->date;
+    $edit_godown = $item->UnloadToGodown;
+    $edit_delivery = $item->DirectDilevary;
+    $edit_product = $item->product;
+}
+
+//UPDATE DATA 
+$sql2 = "UPDATE unloagingdata SET 
+        date='$edit_date',
+        UnloadToGodown='$edit_godown',
+        DirectDilevary='$edit_delivery',
+        product=$edit_product
+        WHERE id=$edit_id
+        ";
+$dataStmt2 = $connection->prepare($sql2);
+
+
+
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unloading Report</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-3">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-5">
+
+                <a href="index.php" class="btn btn-primary mb-2">Back</a>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Edit</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
+                            <div class="my-3">
+                                <label for="">Date</label>
+                                <input type="date" name="edit_date" value="<?php echo $edit_date ?>" class="form-control">
+                            </div>
+                            <div class="my-3">
+                                <label for="">Unload to Godown</label>
+                                <input type="number" name="edit_godown" value="<?php echo $edit_godown ?>" class="form-control">
+                            </div>
+                            <div class="my-3">
+                                <label for="">Direct Delivery</label>
+                                <input type="number" name="edit_delivery" value="<?php echo $edit_delivery ?>" class="form-control">
+                            </div>
+                            <div class="my-3">
+                                <label for="">Product</label>
+                                <select name="edit_product" id="" class="form-control">
+                                    <option value="">-Select-</option>
+                                    <option value="Dhan">Dhan</option>
+                                    <option value="Robi">Robi</option>
+                                </select>
+                            </div>
+                            <input type="submit" name="edit_submit" value="Update" class="btn btn-secondary">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
